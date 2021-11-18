@@ -1,0 +1,8 @@
+Description:
+    Adds necessary ActiveRecord migrations to the rails application
+
+Example:
+    bundle exec rails generate hws:transactions:install
+
+    This will create:
+        db/migrate/<migration_number>_create_transaction_group_and_entries.rb
