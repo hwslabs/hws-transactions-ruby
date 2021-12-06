@@ -81,11 +81,11 @@ module Hws::Transactions::Models
       tags['immutable_tags'] = {} unless tags.key? 'immutable_tags'
 
       unless tags['mutable_tags'].keys.all? { |key| self.mutable_tags.include?(key) }
-        raise 'Invalid mutable tags present in add_entry request.'
+        raise "Invalid mutable tags present in add_entry request. Given keys: #{tags['mutable_tags'].keys} | Allowed keys: #{self.mutable_tags}"
       end
 
       unless tags['immutable_tags'].keys.all? { |key| self.immutable_tags.include?(key) }
-        raise 'Invalid immutable_tags tags present in add_entry request.'
+        raise "Invalid immutable_tags tags present in add_entry request. Given keys: #{tags['immutable_tags'].keys} | Allowed keys: #{self.immutable_tags}"
       end
 
       tags
