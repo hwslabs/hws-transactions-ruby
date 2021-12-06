@@ -47,8 +47,14 @@ module Hws # :nodoc:
     #   'last_entry': '',
     #   'page_size': 10
     # }
-    def self.list_entries(transaction_group_id, filters, page_context)
+    def self.list_entries(transaction_group_id, filters = {}, page_context = {})
       self.get_group(transaction_group_id).try(:list_entries, filters.with_indifferent_access, page_context.with_indifferent_access)
+    end
+
+    def self.get_entry(entry_id)
+      entry = ::Hws::Transactions::Models::TransactionEntry.find_by(id: entry_id)
+      { id: entry.id, transaction_group_id: entry.transaction_group_id, value: entry.value, txn_time: entry.txn_time,
+        tags: { immutable_tags: entry.immutable_tags, mutable_tags: entry.mutable_tags } }
     end
 
     module Models # :nodoc:
